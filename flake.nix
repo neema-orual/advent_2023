@@ -42,14 +42,20 @@
                     cc65 --version
                   '';
 
+                  scripts.build.exec = ''
+                    ca65 -vvv --cpu 6502 -l build/listing.txt -o build/abn6507rom.o abn6507rom.s
+                    ld65 -o build/abn6507rom.bin -C memmap.cfg "./build/abn6507rom.o" #"./build/userland.o" #"./build/crom.o"
+                  '';
+
                   scripts.upload.exec = ''
                     ca65 -vvv --cpu 6502 -l build/listing.txt -o build/abn6507rom.o abn6507rom.s
-                    ld65 -o build/abn6507rom.bin -C memmap.cfg "./build/abn6507rom.o" "./build/crom.o" "./build/userland.o"
+                    ld65 -o build/abn6507rom.bin -C memmap.cfg "./build/abn6507rom.o" #"./build/userland.o" #"./build/crom.o"
+
                     serial="/dev/ttyUSB0" #linux
                     eval serial=$serial
                     cat -v < $serial & #Keep serial alive
                     pid=$! #Save for later
-                    stty -f $serial $baudrate
+                    stty -F $serial $baudrate
                     echo -n $'\x01' > $serial #Send SOH to get 65uino ready to receive
                     sleep 0.1 #Wait for timeout
                     cat build/userland.bin > $serial
@@ -59,8 +65,12 @@
 
                   scripts.flash.exec = ''
                     ca65 -vvv --cpu 6502 -l build/listing.txt -o build/abn6507rom.o abn6507rom.s
-                    ld65 -o build/abn6507rom.bin -C memmap.cfg "./build/abn6507rom.o" "./build/crom.o" "./build/userland.o"
+                    ld65 -o build/abn6507rom.bin -C memmap.cfg "./build/abn6507rom.o" #"./build/crom.o" #"./build/userland.o"
                     minipro -s -p "SST39SF010A" -w build/abn6507rom.bin
+                  '';
+
+                  scripts.push.exec = ''
+
                   '';
                 }
               ];

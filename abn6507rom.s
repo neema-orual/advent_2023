@@ -57,6 +57,7 @@ WTD1KEI = RIOT + $1F ;Write timer (divide by 1024, enable interrupt)
 
 .segment "USERLAND"
 userland:
+.include "./userland.s"
 
 lda #'@'
 jsr ssd1306_sendchar
