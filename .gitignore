@@ -50,3 +50,12 @@ modules.order
 Module.symvers
 Mkfile.old
 dkms.conf
+
+#environment
+.devenv
+.direnv
+.DS_Store
+
+#asm_specific
+*.bin
+build/listing.txt
