@@ -1,5 +1,5 @@
 {
-  "name": "eve",
+  "name": "advent_2023",
   // Select between image and build propieties to pull or build the image.
   // "image": "docker.io/espressif/idf-rust:esp32s3_latest",
   "build": {
@@ -39,6 +39,6 @@
     3333,
     8000
   ],
-  "workspaceMount": "source=${localWorkspaceFolder},target=/home/esp/eve,type=bind,consistency=cached",
-  "workspaceFolder": "/home/esp/eve"
+  "workspaceMount": "source=${localWorkspaceFolder},target=/home/esp/advent_2023,type=bind,consistency=cached",
+  "workspaceFolder": "/home/esp/advent_2023"
 }
