@@ -1,0 +1,8 @@
+[values]
+mcu = "esp32s3"
+advanced = true
+std = true
+espidfver = "v5.1"
+devcontainer = true
+wokwi = true
+ci = true
